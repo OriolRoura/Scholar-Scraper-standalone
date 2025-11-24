@@ -1,5 +1,6 @@
-```markdown
+
 Scholar Scraper
+
 
 Purpose
 -------
@@ -10,60 +11,12 @@ suitable for downstream ingestion (for example a WordPress importer).
 
 Requirements
 ------------
-Install core runtime dependencies into a Python virtual environment. Below are
-equivalent commands for the most common shells — pick the one that matches your
-environment.
-
-Windows (PowerShell)
+Create and activate a Python virtual environment first so dependencies are
+installed into an isolated environment (recommended). After the venv is active,
+install the project's required Python packages using the single command below.
 
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -U pip
 pip install -r .\requirements.txt
-```
-
-Windows (Command Prompt)
-
-```cmd
-python -m venv .venv
-.\.venv\Scripts\activate.bat
-py -m pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-macOS / Linux (bash / zsh)
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
-```
-
-Notes
-- If your system's Python is invoked with `python` instead of `python3`, use
-  `python` for the POSIX example above.
-- If you prefer not to use a virtual environment, you can install globally with
-  `pip install -r requirements.txt` (not recommended — virtualenvs avoid
-  dependency conflicts).
-- Optional Selenium/browser automation dependencies live in
-  `requirements-optional.txt`. Install them only when you want the scraper to
-  automatically open a visible browser for manual CAPTCHA solves:
-
-```powershell
-pip install -r .\requirements-optional.txt
-```
-
-What the commands do
-- `python -m venv .venv`: Creates an isolated virtual environment in `.venv`.
-- `source .venv/bin/activate` / `.\.venv\Scripts\Activate.ps1` /
-  `.\.venv\Scripts\activate.bat`: Activates the virtual environment in the
-  current shell.
-- `pip install -U pip`: Updates pip inside the virtual environment.
-- `pip install -r requirements.txt`: Installs the project's core Python
-  dependencies.
-
 ```
 
 Configuration
