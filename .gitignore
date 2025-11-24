@@ -1,3 +1,11 @@
 .idea
 .run
 log.txt
+.venv
+venv
+__pycache__
+.cache
+results.json
+Scholar-Scraper-standalone.zip
+compare_results.py
+config.json
