@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "domain": ".scholar.google.com",
+      "expiry": 1798550621,
+      "httpOnly": true,
+      "name": "GSP",
+      "path": "/",
+      "sameSite": "None",
+      "secure": true,
+      "value": "LM=1763990621:S=yTUCPnvw-pvWSRGV"
+    },
+    {
+      "domain": ".google.com",
+      "expiry": 1798177319,
+      "httpOnly": true,
+      "name": "__Secure-ENID",
+      "path": "/",
+      "sameSite": "Lax",
+      "secure": true,
+      "value": "29.SE=o-Q8tFrtWar9zatf25AHW19-3U4_gVYBt735XvVODuEei--XRvYsItYRMLq26rZMfMZnA4HoHjbOiSMIPxFd-6JfZFZR4hUPtAQuZxc8JDFrCmZHdIuxb689H7LrPMg5_HbrPrziYIF223uIcc9CtK0f3tPu6WmmW0TUHHEvlTuwYrJDWNv6ahrLUVfW9zBj2Bxl26AheGZRIPYQZkRBlupr_tL6f1uoEFKH-zIsa4gnKQuLOazqXaIgN1jY4pPH"
+    },
+    {
+      "domain": ".google.com",
+      "expiry": 1764001396,
+      "httpOnly": false,
+      "name": "GOOGLE_ABUSE_EXEMPTION",
+      "path": "/",
+      "sameSite": "Lax",
+      "secure": false,
+      "value": "ID=40b72ef71b76fdff:TM=1763990597:C=r:IP=79.154.35.231-:S=a42iIN84GkS93aVgAI_ruGw"
+    }
+  ],
+  "localStorage": {}
+}
