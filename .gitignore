@@ -4,8 +4,12 @@ log.txt
 .venv
 venv
 __pycache__
-.cache
-results.json
 Scholar-Scraper-standalone.zip
 compare_results.py
 config.json
+/.cache
+.cache/last_solved_session.json
+config.json
+results.json
+/scholarly/__pycache__
+.cache/last_solved_session.json

@@ -1,4 +1,6 @@
 from json import JSONEncoder
+import re
+import unicodedata
 
 
 def getObjectPublicAttributes(obj):
@@ -46,6 +48,28 @@ def _make_serializable(obj):
     if hasattr(obj, '__dict__'):
         return _make_serializable(obj.__dict__)
     return str(obj)
+
+
+def _normalize_title_for_dedupe(title: str) -> str:
+    """Normalize a publication title for comparison.
+
+    - Normalize unicode (NFKD), remove diacritics
+    - Lowercase, remove punctuation, collapse whitespace
+    Returns a short canonical string to compare titles.
+    """
+    if not title:
+        return ''
+    try:
+        # Normalize unicode and strip combining marks
+        t = unicodedata.normalize('NFKD', title)
+        t = ''.join(ch for ch in t if not unicodedata.combining(ch))
+        # Remove punctuation (keep word characters and whitespace)
+        t = re.sub(r"[^\w\s]", ' ', t)
+        # Collapse whitespace and lowercase
+        t = re.sub(r'\s+', ' ', t).strip().lower()
+        return t
+    except Exception:
+        return title.strip().lower()
 
 
 def merge_and_save_results(partial_authors, results_file_path):
@@ -124,6 +148,35 @@ def merge_and_save_results(partial_authors, results_file_path):
         for p in pubs:
             if isinstance(p, dict) and not p.get('last_scraped'):
                 p['last_scraped'] = now_iso
+
+    # Deduplicate publications across all authors by normalized title
+    # (fall back to `author_pub_id` when title is missing).
+    seen_titles = set()
+    for a in author_map.values():
+        pubs = a.get('publications', []) or []
+        new_pubs = []
+        for p in pubs:
+            if not isinstance(p, dict):
+                continue
+
+            # Extract title from common locations
+            title = p.get('title') or (p.get('bib') and p['bib'].get('title')) or ''
+            normalized = _normalize_title_for_dedupe(title)
+
+            # If no title available, fall back to author_pub_id
+            if not normalized:
+                pid = p.get('author_pub_id') or ''
+                normalized = f"__id__:{pid}"
+
+            if normalized in seen_titles:
+                # Skip duplicate publication (title already seen)
+                continue
+            seen_titles.add(normalized)
+            new_pubs.append(p)
+
+        # Replace publications with deduped list
+        author_map[a.get('scholar_id')] = a
+        a['publications'] = new_pubs
 
     merged = list(author_map.values())
 
